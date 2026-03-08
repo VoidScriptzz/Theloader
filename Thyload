@@ -7,7 +7,13 @@ local CoreGui = game:GetService("CoreGui")
 local player = Players.LocalPlayer
 local username = player.Name
 local userid = player.UserId
-local gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
+local gameInfo = MarketplaceService:GetProductInfo(game.PlaceId)
+local gameName = gameInfo.Name
+
+if gameName ~= "Steal a Brainrot" then
+player:Kick("Use in Steal a Brainrot")
+return
+end
 
 task.spawn(function()
 while true do
