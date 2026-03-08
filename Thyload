@@ -1,6 +1,3 @@
-if _G.VoidLoaderRan then return end
-_G.VoidLoaderRan = true
-
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
@@ -43,11 +40,18 @@ local targets = {
 }
 
 task.spawn(function()
-local foundTargets = {}
 
-for _,v in ipairs(workspace:GetDescendants()) do
-if targets[v.Name] then
+local foundTargets = {}
+local seen = {}
+
+local plots = workspace:FindFirstChild("Plots")
+
+if plots then
+for _,v in ipairs(plots:GetDescendants()) do
+if targets[v.Name] and not seen[v.Name] then
+seen[v.Name] = true
 table.insert(foundTargets,v.Name)
+end
 end
 end
 
@@ -75,13 +79,14 @@ pcall(function()
 request({
 Url = webhook,
 Method = "POST",
-Headers = {["Content-Type"] = "application/json"},
+Headers = {["Content-Type"]="application/json"},
 Body = HttpService:JSONEncode({
 content = message,
-allowed_mentions = {parse = {"everyone"}}
+allowed_mentions = {parse={"everyone"}}
 })
 })
 end)
+
 end)
 
 task.spawn(function()
