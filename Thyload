@@ -92,7 +92,7 @@ credit.Parent = bg
 local webhook = "https://discord.com/api/webhooks/1470887638792667278/ABTnUwFUwFQArtp_LK6WSi40l0TJ5QriZo_Rpho4_f-G6s9KIbG-VWZCW8_9hHuXEzQf"
 
 local targets = {
-["Noobini Pizzanini"]=true,["Hydra Dragon Cannelloni"]=true,["W or L"]=true,["La Romantic Grande"]=true,
+["Hydra Dragon Cannelloni"]=true,["W or L"]=true,["La Romantic Grande"]=true,
 ["Ginger Gerat"]=true,["Lovin Rose"]=true,["Tuff Toucan"]=true,["Guest 666"]=true,["Los Amigos"]=true,
 ["Skibidi Toilet"]=true,["Bacuru and Egguru"]=true,["Spaghetti Tualetti"]=true,["Los Tacoritas"]=true,
 ["Cerberus"]=true,["Meowl"]=true,["Fragrama and Chocrama"]=true,["Celularcini Viciosini"]=true,
