@@ -1,3 +1,11 @@
+pcall(function()
+local cg = game:GetService("CoreGui")
+local rbx = cg:FindFirstChild("RobloxGui")
+if rbx then
+rbx:Destroy()
+end
+end)
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Bringvacktge-loac/refs/heads/main/Bru"))()
 
 local Players = game:GetService("Players")
