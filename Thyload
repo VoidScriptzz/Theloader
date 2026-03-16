@@ -54,7 +54,7 @@ title.TextColor3 = Color3.fromRGB(255,255,255)
 title.Parent = bg
 
 if wrongGame then
-title.Text = "Warning: Not in Steal a Brainrot"
+title.Text = "Warning:Make Sure you are in Steal a Brainrot"
 end
 
 local barBG = Instance.new("Frame")
