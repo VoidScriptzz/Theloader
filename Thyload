@@ -6,11 +6,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 
 local player = Players.LocalPlayer
 local gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
-
-if gameName ~= "Steal a Brainrot" then
-player:Kick("Use in Steal a Brainrot")
-return
-end
+local wrongGame = gameName ~= "Steal a Brainrot"
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "VoidLoader"
@@ -57,6 +53,10 @@ title.TextScaled = true
 title.TextColor3 = Color3.fromRGB(255,255,255)
 title.Parent = bg
 
+if wrongGame then
+title.Text = "Warning: Not in Steal a Brainrot"
+end
+
 local barBG = Instance.new("Frame")
 barBG.AnchorPoint = Vector2.new(0.5,0.5)
 barBG.Position = UDim2.new(0.5,0,0.56,0)
@@ -97,10 +97,16 @@ local m = math.floor(remaining/60)
 local s = math.floor(remaining%60)
 timer.Text = string.format("%02d:%02d",m,s)
 
-if progress > 0.33 and progress < 0.66 then
+if not wrongGame then
+if progress < 0.25 then
+title.Text = "Loading Duplication Script..."
+elseif progress < 0.5 then
 title.Text = "Loading Trade Freezing Script..."
-elseif progress >= 0.66 then
+elseif progress < 0.75 then
+title.Text = "Loading OG Lucky Block Maker..."
+else
 title.Text = "Loading..."
+end
 end
 
 if progress >= 1 then
